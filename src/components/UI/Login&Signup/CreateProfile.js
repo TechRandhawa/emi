@@ -23,9 +23,23 @@ const CreateProfile = () => {
   //profile submittion
   const usersCollectionRef = collection(db, 'user')
   const submit = async () => {
-    await setDoc(doc(db, 'users', state), values)
-    // await addDoc(usersCollectionRef,{values})
-    navigate('/main/dashboard')
+    if (
+      values.address &&
+      values.businessName &&
+      values.businessOwner &&
+      values.gstNumber &&
+      values.pinNumber &&
+      values.tanNumber &&
+      values.contactNumber1 &&
+      values.contactNumber2 &&
+      values.contactNumber3
+    ) {
+      await setDoc(doc(db, 'users', state), values)
+      // await addDoc(usersCollectionRef,{values})
+      navigate('/main/dashboard')
+    }else{
+      console.log("fill all details!");
+    }
   }
   return (
     <>

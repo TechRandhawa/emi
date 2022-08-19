@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { db, auth } from '../../../firebase-config'
-import { collection, addDoc, setDoc, doc } from 'firebase/firestore'
+import { collection, addDoc } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 import moment from 'moment'
 
@@ -34,6 +34,7 @@ const AddNewUser = () => {
     typeOfInstalment: 'monthly',
     interest: 0,
     startDate: '',
+    installment: [],
   })
 
   let userUid = ''
@@ -44,22 +45,12 @@ const AddNewUser = () => {
       } else {
       }
     })
-    setValues((uid)=>({...uid,uid:userUid}))
+    setValues((uid) => ({ ...uid, uid: userUid }))
   }, [])
 
-  //sorting icons
-  const [NameIcon, setNameIcon] = useState(false)
-  const [SourceIcon, setSourceIcon] = useState(false)
-  const [VerticalIcon, setVerticalIcon] = useState(false)
-  const [TotalRecIcon, setTotalRecIcon] = useState(false)
-  const [TodayChgIcon, setTodayChgIcon] = useState(false)
-  const [DateIcon, setDateIcon] = useState(false)
-
-  const [Table, setTable] = useState(false)
   const [NewTable, setNewTable] = useState([])
 
   //Add Users
-  let interest = 0
   const usersCollectionRef = collection(db, 'users-client')
 
   //create intallments new method
@@ -108,17 +99,25 @@ const AddNewUser = () => {
         isPaid: false,
         paidDate: null,
       }
+
       totalLoopAmount += Math.round(totalAmount / noInstalment)
       tableValues.push(obj)
     }
+
     let difference = parseInt(totalAmount - totalLoopAmount)
 
     tableValues[tableValues.length - 1].installment =
       tableValues[tableValues.length - 1].installment + difference
+
     setNewTable([...tableValues])
 
     console.log(difference, totalLoopAmount)
   }
+
+  useEffect(() => {
+    setValues((installment) => ({ ...installment, installment: NewTable }))
+  }, [NewTable])
+  
 
   const submit = async () => {
     if (
@@ -134,15 +133,12 @@ const AddNewUser = () => {
       values.interest &&
       values.startDate
     ) {
-      await addDoc(usersCollectionRef, { values })
-      // await addDoc(usersCollectionRef, { NewTable })
+      await addDoc(usersCollectionRef, { ...values })
       console.log('done')
     } else {
     }
-    // await setDoc(doc(db,"users-client",uid),values)
     console.log('error', values)
   }
-  // console.log(values);
 
   return (
     <>
