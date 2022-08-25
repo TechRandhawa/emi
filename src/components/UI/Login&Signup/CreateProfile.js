@@ -44,9 +44,9 @@ const CreateProfile = () => {
   return (
     <>
       <div className="flex h-screen bg-gradient-to-r from-[#C7C5F4] to-[#776BCC] justify-center items-center">
-        <div className="overflow-hidden flex relative h-[700px] w-[640px] shadow-2xl bg-gradient-to-r from-[#5D54A4] to-[#7C78B8]">
+        <div className="overflow-hidden flex relative 2xl:h-[700px] h-[600px] w-[640px] shadow-2xl bg-gradient-to-r from-[#5D54A4] to-[#7C78B8]">
           <div className="relative z-10 h-full w-full">
-            <div className="p-8 pt-14 relative space-y-8 text-black">
+            <div className="2xl:p-8 pl-5 pt-5 2xl:pt-14 relative space-y-8 text-black">
               <h1 className="font-semibold text-2xl uppercase">
                 Create your profile
               </h1>
@@ -170,7 +170,7 @@ const CreateProfile = () => {
               </div>
               <div className="flex mt-11 justify-center">
                 <button
-                  className="bg-white text-sm font-semibold w-3/4 mt-8 py-4 px-5 rounded-3xl border border-slate-700 flex justify-center items-center shadow-md shadow-black"
+                  className="bg-white text-sm font-semibold w-3/4 2xl:mt-8 py-4 px-5 rounded-3xl border border-slate-700 flex justify-center items-center shadow-md shadow-black"
                   onClick={() => submit()}
                 >
                   <span>Create your profile</span>

@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate, Outlet } from 'react-router-dom'
 import { db, auth } from '../../../firebase-config'
 import { collection, addDoc } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -7,6 +8,7 @@ import moment from 'moment'
 
 const AddNewUser = () => {
   const state = useSelector((state) => state.uidNumber)
+  const navigate = useNavigate()
   //   Add User
   // -> name
   // -> mobile
@@ -117,8 +119,7 @@ const AddNewUser = () => {
   useEffect(() => {
     setValues((installment) => ({ ...installment, installment: NewTable }))
   }, [NewTable])
-  
-
+  const [loader, setLoader] = useState(false)
   const submit = async () => {
     if (
       values.uid &&
@@ -133,145 +134,227 @@ const AddNewUser = () => {
       values.interest &&
       values.startDate
     ) {
+      setLoader(true)
       await addDoc(usersCollectionRef, { ...values })
-      console.log('done')
+      setLoader(false)
+      navigate("/main/alluser")
     } else {
     }
     console.log('error', values)
   }
+  console.log(NewTable)
 
   return (
     <>
-      <div className="flex flex-col h-full bg-slate-500">
-        <div className="flex p-2 w-full justify-center items-center">
-          <div className="flex flex-col w-full bg-blue-400 p-5 space-y-3">
-            <h1>Add User</h1>
-            <input
-              type="text"
-              placeholder="name"
-              onChange={(e) =>
-                setValues((name) => ({ ...name, name: e.target.value }))
-              }
-            />
-            <input
-              type="number"
-              placeholder="mobile"
-              onChange={(e) =>
-                setValues((mobile) => ({ ...mobile, mobile: e.target.value }))
-              }
-            />
-            <input
-              type="email"
-              placeholder="email"
-              onChange={(e) =>
-                setValues((email) => ({ ...email, email: e.target.value }))
-              }
-            />
-            <input
-              type="name"
-              placeholder="product name"
-              onChange={(e) =>
-                setValues((pName) => ({ ...pName, pName: e.target.value }))
-              }
-            />
-            <input
-              type="name"
-              placeholder="product detail"
-              onChange={(e) =>
-                setValues((pDetail) => ({
-                  ...pDetail,
-                  pDetail: e.target.value,
-                }))
-              }
-            />
-            <input
-              type="number"
-              placeholder="total price"
-              onChange={(e) =>
-                setValues((totalPrice) => ({
-                  ...totalPrice,
-                  totalPrice: parseInt(e.target.value, 10),
-                }))
-              }
-            />
-            <input
-              type="number"
-              placeholder="Initail payment"
-              onChange={(e) =>
-                setValues((initialPay) => ({
-                  ...initialPay,
-                  initialPay: parseInt(e.target.value, 10),
-                }))
-              }
-            />
-            <input
-              type="number"
-              placeholder="number of instalments"
-              onChange={(e) =>
-                setValues((noInstalment) => ({
-                  ...noInstalment,
-                  noInstalment: parseInt(e.target.value, 10),
-                }))
-              }
-            />
-
-            {/* <input
-              type="text"
-              placeholder="type of instalments"
-              onChange={(e) =>
-                setValues((typeOfInstalment) => ({
-                  ...typeOfInstalment,
-                  typeOfInstalment: e.target.value,
-                }))
-              }
-            /> */}
-            <select
-              onChange={(e) =>
-                setValues((typeOfInstalment) => ({
-                  ...typeOfInstalment,
-                  typeOfInstalment: e.target.value,
-                }))
-              }
-            >
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-
-            <input
-              type="number"
-              placeholder="Interest Rate"
-              onChange={(e) =>
-                setValues((interest) => ({
-                  ...interest,
-                  interest: parseInt(e.target.value, 10),
-                }))
-              }
-            />
-            <input
-              type="date"
-              placeholder="Start Date"
-              onChange={(e) =>
-                setValues((startDate) => ({
-                  ...startDate,
-                  startDate: e.target.value,
-                }))
-              }
-            />
-            <button onClick={() => createInstallments()}>
-              Create Instalments
-            </button>
-            <div>
-              {NewTable.map((value, key) => (
-                <div className="p-3">
-                  <h4>Month : {key + 1}</h4>
-                  <p>{value.installment}</p>
-                  <p>{value.date}</p>
-                </div>
-              ))}
+      <div className="h-full px-4">
+        <div className="w-full flex">
+          <div className="w-1/2 border-r-2 px-4 py-2">
+            <h1 className="font-semibold text-lg">Add New User</h1>
+            <div className="flex pt-2 space-x-4">
+              <div className="flex flex-1 flex-col space-y-1">
+                <span>Name</span>
+                <input
+                  type="text"
+                  placeholder="name"
+                  className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
+                  onChange={(e) =>
+                    setValues((name) => ({ ...name, name: e.target.value }))
+                  }
+                />
+              </div>
+              <div className="flex flex-1 flex-col space-y-1">
+                <span>Mobile No</span>
+                <input
+                  type="number"
+                  placeholder="mobile"
+                  className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
+                  onChange={(e) =>
+                    setValues((mobile) => ({
+                      ...mobile,
+                      mobile: e.target.value,
+                    }))
+                  }
+                />
+              </div>
             </div>
-            <button onClick={() => submit()}>Submit</button>
+            <div className="flex pt-3 space-x-4">
+              <div className="flex flex-1 flex-col space-y-1">
+                <span>Email</span>
+                <input
+                  type="email"
+                  placeholder="email"
+                  className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
+                  onChange={(e) =>
+                    setValues((email) => ({ ...email, email: e.target.value }))
+                  }
+                />
+              </div>
+              <div className="flex flex-1 flex-col space-y-1">
+                <span>Product Name</span>
+                <input
+                  type="name"
+                  placeholder="product name"
+                  className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
+                  onChange={(e) =>
+                    setValues((pName) => ({ ...pName, pName: e.target.value }))
+                  }
+                />
+              </div>
+            </div>
+            <div className="flex pt-3 space-x-4">
+              <div className="flex flex-1 flex-col space-y-1">
+                <span>Product Details</span>
+                <input
+                  type="name"
+                  placeholder="product detail"
+                  className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
+                  onChange={(e) =>
+                    setValues((pDetail) => ({
+                      ...pDetail,
+                      pDetail: e.target.value,
+                    }))
+                  }
+                />
+              </div>
+              <div className="flex flex-1 flex-col space-y-1">
+                <span>Total Price</span>
+                <input
+                  type="number"
+                  placeholder="total price"
+                  className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
+                  onChange={(e) =>
+                    setValues((totalPrice) => ({
+                      ...totalPrice,
+                      totalPrice: parseInt(e.target.value, 10),
+                    }))
+                  }
+                />
+              </div>
+            </div>
+            <div className="flex pt-3 space-x-4">
+              <div className="flex flex-1 flex-col space-y-1">
+                <span>Initail Payment</span>
+                <input
+                  type="number"
+                  placeholder="Initail payment"
+                  className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
+                  onChange={(e) =>
+                    setValues((initialPay) => ({
+                      ...initialPay,
+                      initialPay: parseInt(e.target.value, 10),
+                    }))
+                  }
+                />
+              </div>
+              <div className="flex flex-1 flex-col space-y-1">
+                <span>No of Installments</span>
+                <input
+                  type="number"
+                  placeholder="number of instalments"
+                  className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
+                  onChange={(e) =>
+                    setValues((noInstalment) => ({
+                      ...noInstalment,
+                      noInstalment: parseInt(e.target.value, 10),
+                    }))
+                  }
+                />
+              </div>
+            </div>
+            <div className="flex pt-3 space-x-4">
+              <div className="flex flex-1 flex-col space-y-1">
+                <span>Type of Installment</span>
+                <select
+                  className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
+                  onChange={(e) =>
+                    setValues((typeOfInstalment) => ({
+                      ...typeOfInstalment,
+                      typeOfInstalment: e.target.value,
+                    }))
+                  }
+                >
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <div className="flex flex-1 flex-col space-y-1">
+                <span>Intearest</span>
+                <input
+                  type="number"
+                  placeholder="Interest Rate"
+                  className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
+                  onChange={(e) =>
+                    setValues((interest) => ({
+                      ...interest,
+                      interest: parseInt(e.target.value, 10),
+                    }))
+                  }
+                />
+              </div>
+            </div>
+            <div className="flex pt-3 space-x-4">
+              <div className="flex flex-1 flex-col space-y-1">
+                <span>Start Date</span>
+                <input
+                  type="date"
+                  placeholder="Start Date"
+                  className="border-transparent w-1/2 outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
+                  onChange={(e) =>
+                    setValues((startDate) => ({
+                      ...startDate,
+                      startDate: e.target.value,
+                    }))
+                  }
+                />
+              </div>
+            </div>
+
+            <div className="flex pt-2 space-x-4">
+              <button
+                className="bg-white font-semibold hover:border-white w-3/4 2xl:mt-8 py-4 px-5 rounded-3xl border border-slate-500 flex justify-center items-center shadow-md shadow-black"
+                onClick={() => createInstallments()}
+              >
+                Create Instalments
+              </button>
+              <button
+                className="bg-white font-semibold hover:border-white w-3/4 2xl:mt-8 py-4 px-5 rounded-3xl border border-slate-500 flex justify-center items-center shadow-md shadow-black"
+                onClick={() => submit()}
+                disabled={loader}
+              >
+                {loader ? 'Loading...' : 'Submit'}
+              </button>
+            </div>
           </div>
+          <div className="p-4 w-1/2">
+            <table className="w-full border-2">
+              <thead>
+                <tr className="text-center border-b-2">
+                  <th className="w-28 py-3 text-left pl-2">
+                    Installment Basis
+                  </th>
+                  <th className="w-28">Installments</th>
+                  <th className="w-28">Due Dates</th>
+                </tr>
+              </thead>
+              <tbody>
+                {NewTable.map((value, key) => (
+                  <tr className="border-b-2">
+                    <td className="pl-2">
+                      {values.typeOfInstalment} : {key + 1}
+                    </td>
+                    <td className="text-center">{value.installment}</td>
+                    <td className="text-center">{value.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/*           
+          <div className='flex w-1/2 h-fit justify-center pt-10'>
+            <p className='text-2xl p-2 rounded-lg bg-white'>Fill the details to get EMI</p>
+          </div> */}
         </div>
       </div>
     </>
