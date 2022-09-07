@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import Login from '../UI/Login&Signup/Login'
@@ -11,16 +11,20 @@ import AddNewUser from '../UI/Screens/AddNewUser'
 import AllUsers from '../UI/Screens/AllUsers'
 import { db, auth } from '../../firebase-config'
 import { onAuthStateChanged } from 'firebase/auth'
-
+import { useDispatch } from 'react-redux'
+import { getUserUID } from '../Redux/action'
 function Router() {
+  const dispatch = useDispatch()
   const [userUid, setUserUid] = useState('')
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setUserUid(user.uid)
+      dispatch(getUserUID(user.uid))
     } else {
       console.log('logout')
     }
   })
+
   return (
     <>
       <Routes>

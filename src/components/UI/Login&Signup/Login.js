@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../../firebase-config'
-import { useDispatch } from 'react-redux'
-import { getUserUID } from '../../Redux/action'
+// import { useDispatch } from 'react-redux'
+// import { getUserUID } from '../../Redux/action'
 
 const Login = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   let navigate = useNavigate()
 
   //login
@@ -17,7 +17,7 @@ const Login = () => {
 
   //login Function
   const login = async () => {
-    let user = undefined
+    let user = ''
     try {
       user = await signInWithEmailAndPassword(
         auth,
@@ -27,11 +27,10 @@ const Login = () => {
       console.log(user)
     } catch (error) {
       console.log(error.message)
-      // notify(error.message)
     }
     if (user.user.email) {
       console.log(values)
-      dispatch(getUserUID(user.user.uid))
+      // dispatch(getUserUID(user.user.uid))
       navigate('/main/dashboard')
     }
     console.log(user.user.uid)

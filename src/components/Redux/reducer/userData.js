@@ -1,8 +1,13 @@
-const initailState = 'Invalid!'
+const initailState = {
+  uid: '',
+}
 const uidNumber = (state = initailState, action) => {
   switch (action.type) {
     case 'USERUID':
-      return action.payload
+      return {
+        ...state,
+        uid: action.payload,
+      }
 
     default:
       return state

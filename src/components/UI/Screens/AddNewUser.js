@@ -3,11 +3,10 @@ import { useSelector } from 'react-redux'
 import { useNavigate, Outlet } from 'react-router-dom'
 import { db, auth } from '../../../firebase-config'
 import { collection, addDoc } from 'firebase/firestore'
-import { onAuthStateChanged } from 'firebase/auth'
 import moment from 'moment'
 
 const AddNewUser = () => {
-  const state = useSelector((state) => state.uidNumber)
+  const Uid = useSelector((state) => state.uidNumber.uid)
   const navigate = useNavigate()
   //   Add User
   // -> name
@@ -37,18 +36,12 @@ const AddNewUser = () => {
     interest: 0,
     startDate: '',
     installment: [],
+    delete: false,
   })
 
-  let userUid = ''
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        userUid = user.uid
-      } else {
-      }
-    })
-    setValues((uid) => ({ ...uid, uid: userUid }))
-  }, [])
+    setValues((uid) => ({ ...uid, uid: Uid }))
+  }, [Uid])
 
   const [NewTable, setNewTable] = useState([])
 
@@ -137,7 +130,7 @@ const AddNewUser = () => {
       setLoader(true)
       await addDoc(usersCollectionRef, { ...values })
       setLoader(false)
-      navigate("/main/alluser")
+      navigate('/main/alluser')
     } else {
     }
     console.log('error', values)
