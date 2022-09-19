@@ -13,6 +13,8 @@ import { db, auth } from '../../firebase-config'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 import { getUserUID } from '../Redux/action'
+import PendingUsers from '../UI/Screens/PendingUsers'
+import UpcomingUsers from '../UI/Screens/UpcomingUsers'
 function Router() {
   const dispatch = useDispatch()
   const [userUid, setUserUid] = useState('')
@@ -37,6 +39,8 @@ function Router() {
             <Route path="dashboard" element={<Dashboard />}></Route>
             <Route path="newuser" element={<AddNewUser />}></Route>
             <Route path="alluser" element={<AllUsers />}></Route>
+            <Route path="pending" element={<PendingUsers />}></Route>
+            <Route path="upcomming" element={<UpcomingUsers />}></Route>
           </Route>
         )}
       </Routes>

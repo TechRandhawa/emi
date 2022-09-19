@@ -207,7 +207,7 @@ const AllUsers = () => {
                       {Data.installment.map((data, index) => {
                         return (
                           <tr className="text-center border-2">
-                            <td className="">{index}</td>
+                            <td className="">{index+1}</td>
                             <td>{data.date}</td>
                             <td>{data.installment}</td>
                             {data.paidDate ? (

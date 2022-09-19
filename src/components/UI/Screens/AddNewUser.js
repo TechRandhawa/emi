@@ -89,7 +89,7 @@ const AddNewUser = () => {
       let obj = {
         date: moment(startDate)
           .add(monthsToBeAdded(typeOfInstalment) * i, 'M')
-          .format('DD:MM:YYYY'),
+          .format('DD-MM-YYYY'),
         installment: Math.round(totalAmount / noInstalment),
         isPaid: false,
         paidDate: null,

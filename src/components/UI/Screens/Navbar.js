@@ -35,6 +35,14 @@ const Navbar = () => {
               <div>
                 <button
                   className="bg-white bg-opacity-50 bg-blur-xl py-2 px-6 rounded-3xl hover:bg-white"
+                  onClick={() => navigate('newuser')}
+                >
+                  <span>ADD Users</span>
+                </button>
+              </div>
+              <div>
+                <button
+                  className="bg-white bg-opacity-50 bg-blur-xl py-2 px-6 rounded-3xl hover:bg-white"
                   onClick={() => navigate('alluser')}
                 >
                   <span>ALL Users</span>
@@ -43,9 +51,17 @@ const Navbar = () => {
               <div>
                 <button
                   className="bg-white bg-opacity-50 bg-blur-xl py-2 px-6 rounded-3xl hover:bg-white"
-                  onClick={() => navigate('newuser')}
+                  onClick={() => navigate('pending')}
                 >
-                  <span>ADD Users</span>
+                  <span>Pending Users</span>
+                </button>
+              </div>
+              <div>
+                <button
+                  className="bg-white bg-opacity-50 bg-blur-xl py-2 px-6 rounded-3xl hover:bg-white"
+                  onClick={() => navigate('upcomming')}
+                >
+                  <span>Upcoming Users</span>
                 </button>
               </div>
               <div>
