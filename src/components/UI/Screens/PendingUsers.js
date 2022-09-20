@@ -12,10 +12,13 @@ import { db, auth } from '../../../firebase-config'
 import { useSelector } from 'react-redux'
 import DataTable from 'react-data-table-component'
 import moment from 'moment/moment'
+import { useDispatch } from 'react-redux'
+import { getClientUID } from '../../Redux/action'
 
 const PendingUsers = () => {
   const Uid = useSelector((state) => state.uidNumber.uid)
   const navigate=useNavigate()
+  const dispatch = useDispatch()
 
   const [Users, setUsers] = useState()
 
@@ -173,10 +176,16 @@ const PendingUsers = () => {
             paidDate: userTemp[j].paidDate,
           }
           info['id'] = parseInt(j,10)+1
-          info['paid'] = info.isPaid.toString()
+          // info['paid'] = info.isPaid.toString()
+          if (info.isPaid) {
+            info['paid']="Paid"
+          }else{
+            info['paid']="Not Paid"
+          }
           if (info.paidDate == null) {
             info['payDate'] = 'N/a'
           }
+          info['uid']=e
           user.push(info)
         }
         setData(user)
@@ -226,6 +235,7 @@ const PendingUsers = () => {
   ]
 
   const pay=()=>{
+    dispatch(getClientUID(data[0].uid))
     navigate('/main/alluser')
   }
 
@@ -235,17 +245,18 @@ const PendingUsers = () => {
         <div className="flex py-3 px-6">
           <div className="w-full">
             <DataTable
-              title="Pending Users"
+              title="Pending Instalment"
               columns={columns}
               data={userArr}
               pagination
-              // fixedHeaderScrollHeight='240px'
+              fixedHeader
+              fixedHeaderScrollHeight="480px"
             />
           </div>
         </div>
         {showInfo && (
-          <div className="absolute inset-0 bg-white bg-opacity-50 flex pt-28 justify-center">
-            <div className="bg-white w-4/5 h-fit rounded-lg">
+          <div className="absolute inset-0 bg-black bg-opacity-50 z-10 flex pt-28 justify-center">
+            <div className="bg-white w-4/5 h-fit  rounded-lg z-10 border-2 shadow-2xl">
               <div className="flex flex-row p-5">
                   <div className="flex flex-wrap space-x-16">
                     <div className="flex flex-col">
@@ -277,7 +288,7 @@ const PendingUsers = () => {
               </div>
               <div>
                 <DataTable
-                  title="Upcoming Users"
+                  title="Pending Dues"
                   columns={viewColumns}
                   data={data}
                   pagination

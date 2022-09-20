@@ -12,10 +12,13 @@ import { db, auth } from '../../../firebase-config'
 import { useSelector } from 'react-redux'
 import DataTable from 'react-data-table-component'
 import moment from 'moment/moment'
+import { useDispatch } from 'react-redux'
+import { getClientUID } from '../../Redux/action'
 
 const UpcomingUsers = () => {
   const Uid = useSelector((state) => state.uidNumber.uid)
-  const navigate=useNavigate()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const [Users, setUsers] = useState()
 
@@ -172,11 +175,17 @@ const UpcomingUsers = () => {
             isPaid: userTemp[j].isPaid,
             paidDate: userTemp[j].paidDate,
           }
-          info['id'] = parseInt(j,10)+1
-          info['paid'] = info.isPaid.toString()
+          info['id'] = parseInt(j, 10) + 1
+          // info['paid'] = info.isPaid.toString()
+          if (info.isPaid) {
+            info['paid']="Paid"
+          }else{
+            info['paid']="Not Paid"
+          }
           if (info.paidDate == null) {
             info['payDate'] = 'N/a'
           }
+          info['uid'] = e
           user.push(info)
         }
         setData(user)
@@ -225,7 +234,8 @@ const UpcomingUsers = () => {
     },
   ]
 
-  const pay=()=>{
+  const pay = () => {
+    dispatch(getClientUID(data[0].uid))
     navigate('/main/alluser')
   }
 
@@ -235,17 +245,18 @@ const UpcomingUsers = () => {
         <div className="flex py-3 px-6">
           <div className="w-full">
             <DataTable
-              title="Upcoming Users"
+              title="Upcoming Instalments"
               columns={columns}
               data={userArr}
               pagination
-              // fixedHeaderScrollHeight='240px'
+              fixedHeader
+              fixedHeaderScrollHeight="480px"
             />
           </div>
         </div>
         {showInfo && (
-          <div className="absolute inset-0 bg-white bg-opacity-50 flex pt-28 justify-center">
-            <div className="bg-white w-4/5 h-fit rounded-lg">
+          <div className="absolute inset-0 bg-black z-10 bg-opacity-50 flex pt-28 justify-center">
+            <div className="bg-white w-4/5 h-fit rounded-lg z-10 border-2 shadow-2xl">
               <div className="flex flex-row flex-wrap p-4">
                 <div className="flex flex-col pt-5 space-y-8">
                   <div className="flex space-x-16">
@@ -279,12 +290,12 @@ const UpcomingUsers = () => {
               </div>
               <div>
                 <DataTable
-                  title="Upcoming Users"
+                  title="Upcoming Instalments"
                   columns={viewColumns}
                   data={data}
                   pagination
                   fixedHeader
-                  fixedHeaderScrollHeight='240px'
+                  fixedHeaderScrollHeight="240px"
                 />
               </div>
               <div className="space-x-2 p-3 flex justify-end font-mono">
@@ -296,7 +307,7 @@ const UpcomingUsers = () => {
                 </button>
                 <button
                   className="bg-[#776BCC] font-semibold hover:border-black rounded-3xl border border-slate-500 py-2 px-7"
-                  onClick={()=>pay()}
+                  onClick={() => pay()}
                 >
                   Pay
                 </button>

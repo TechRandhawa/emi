@@ -57,10 +57,7 @@ const AddNewUser = () => {
       case 'quarterly':
         return 3
         break
-      case 'Half Yearly':
-        return 6
-        break
-      case 'Yearly':
+      case 'yearly':
         return 12
         break
       default:
@@ -259,12 +256,15 @@ const AddNewUser = () => {
                 <span>Type of Installment</span>
                 <select
                   className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
-                  onChange={(e) =>
+                  onChange={(e) => {
                     setValues((typeOfInstalment) => ({
                       ...typeOfInstalment,
                       typeOfInstalment: e.target.value,
                     }))
-                  }
+                    let temp = [...NewTable]
+                    temp = []
+                    setNewTable(temp)
+                  }}
                 >
                   <option value="monthly">Monthly</option>
                   <option value="quarterly">Quarterly</option>
@@ -310,13 +310,15 @@ const AddNewUser = () => {
               >
                 Create Instalments
               </button>
-              <button
-                className="bg-white font-semibold hover:border-white w-3/4 2xl:mt-8 py-4 px-5 rounded-3xl border border-slate-500 flex justify-center items-center shadow-md shadow-black"
-                onClick={() => submit()}
-                disabled={loader}
-              >
-                {loader ? 'Loading...' : 'Submit'}
-              </button>
+              {NewTable.length ? (
+                <button
+                  disabled={true}
+                  className="bg-white font-semibold hover:border-white w-3/4 2xl:mt-8 py-4 px-5 rounded-3xl border border-slate-500 flex justify-center items-center shadow-md shadow-black"
+                  onClick={() => submit()}
+                >
+                  {loader ? 'Loading...' : 'Submit'}
+                </button>
+              ):null}
             </div>
           </div>
           <div className="p-4 w-1/2">

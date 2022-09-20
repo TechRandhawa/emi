@@ -53,7 +53,7 @@ const Navbar = () => {
                   className="bg-white bg-opacity-50 bg-blur-xl py-2 px-6 rounded-3xl hover:bg-white"
                   onClick={() => navigate('pending')}
                 >
-                  <span>Pending Users</span>
+                  <span>Pending Instalment</span>
                 </button>
               </div>
               <div>
@@ -61,7 +61,7 @@ const Navbar = () => {
                   className="bg-white bg-opacity-50 bg-blur-xl py-2 px-6 rounded-3xl hover:bg-white"
                   onClick={() => navigate('upcomming')}
                 >
-                  <span>Upcoming Users</span>
+                  <span>Upcoming Instalment</span>
                 </button>
               </div>
               <div>
