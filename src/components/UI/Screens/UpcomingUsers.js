@@ -184,6 +184,8 @@ const UpcomingUsers = () => {
           }
           if (info.paidDate == null) {
             info['payDate'] = 'N/a'
+          }if (info.paidDate == 'N/a'){
+            info['payDate'] = 'N/a'
           }
           info['uid'] = e
           user.push(info)

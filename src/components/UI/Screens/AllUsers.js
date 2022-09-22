@@ -79,10 +79,13 @@ const AllUsers = () => {
     console.log(paidUser)
   }
   const saveUser = async () => {
-    const docRef = doc(db, 'users-client', Users[userIndex].id)
+    setLoader(true)
+    const docRef = doc(db, 'users-client', userIndex)
     await setDoc(docRef, Data)
     console.log('User Saved')
+    setLoader(false)
   }
+  const [loader, setLoader] = useState(false)
 
   const remove = (e) => {
     setDelAction(true)
@@ -309,10 +312,10 @@ const AllUsers = () => {
                   Close
                 </button>
                 <button
-                  className="bg-[#776BCC] font-semibold hover:border-black rounded-3xl border border-slate-500 py-2 px-5"
+                  className="bg-[#776BCC] font-semibold hover:border-black rounded-3xl border border-slate-500 py-2 w-24 px-5"
                   onClick={() => saveUser()}
                 >
-                  Save
+                  {loader ? 'Saved...' : 'Save'}
                 </button>
               </div>
             </div>
