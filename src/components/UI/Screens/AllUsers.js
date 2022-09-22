@@ -7,7 +7,7 @@ import {
   setDoc,
   doc,
 } from 'firebase/firestore'
-import { db, auth } from '../../../firebase-config'
+import { db } from '../../../firebase-config'
 import { useSelector } from 'react-redux'
 import moment from 'moment/moment'
 import { useDispatch } from 'react-redux'
@@ -30,7 +30,7 @@ const AllUsers = () => {
     for (let i in Users)
       if (Users[i].id == clientUid) {
         console.log('got id', Users[i].id)
-        pay(i)
+        pay(Users[i].id)
       }
   }, [Users])
 
@@ -41,7 +41,6 @@ const AllUsers = () => {
 
   const usersCollectionRef = collection(db, 'users-client')
 
-  const [info, setInfo] = useState()
   const getUsers = async () => {
     const q = query(
       usersCollectionRef,
