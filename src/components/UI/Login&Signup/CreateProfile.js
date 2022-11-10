@@ -55,7 +55,7 @@ const CreateProfile = () => {
                 <input
                   type="text"
                   id="name"
-                  placeholder="Business Name"
+                  placeholder="Business Name*"
                   className="border-transparent outline-none border-b-2 border-b-slate-700 placeholder:text-black bg-transparent p-3 pl-6 font-bold w-[45%]"
                   onChange={(e) =>
                     setValues((businessName) => ({
@@ -66,7 +66,7 @@ const CreateProfile = () => {
                 />
                 <input
                   type="text"
-                  placeholder="Owner Name"
+                  placeholder="Owner Name*"
                   className="border-transparent outline-none border-b-2 border-b-slate-700 placeholder:text-black bg-transparent p-3 pl-6 font-bold w-[45%]"
                   id="name"
                   onChange={(e) =>
@@ -80,7 +80,7 @@ const CreateProfile = () => {
               <div className="space-x-8">
                 <input
                   type="number"
-                  placeholder="TAN Number"
+                  placeholder="TAN Number*"
                   className="border-transparent outline-none border-b-2 border-b-slate-700 placeholder:text-black bg-transparent p-3 pl-6 font-bold w-[45%]"
                   id="number"
                   onChange={(e) =>
@@ -92,7 +92,7 @@ const CreateProfile = () => {
                 />
                 <input
                   type="number"
-                  placeholder="GST Number"
+                  placeholder="GST Number*"
                   className="border-transparent outline-none border-b-2 border-b-slate-700 placeholder:text-black bg-transparent p-3 pl-6 font-bold w-[45%]"
                   id="number"
                   onChange={(e) =>
@@ -106,7 +106,7 @@ const CreateProfile = () => {
               <div>
                 <textarea
                   type="text"
-                  placeholder="Address"
+                  placeholder="Address*"
                   className="border-transparent outline-none border-b-2 border-b-slate-700 placeholder:text-black bg-transparent p-3 pl-6 font-bold w-4/5"
                   id="address"
                   onChange={(e) =>
@@ -120,7 +120,7 @@ const CreateProfile = () => {
               <div className="space-x-8">
                 <input
                   type="nummber"
-                  placeholder="PIN"
+                  placeholder="PIN*"
                   className="border-transparent outline-none border-b-2 border-b-slate-700 placeholder:text-black bg-transparent p-3 pl-6 font-bold w-[45%]"
                   id="number"
                   onChange={(e) =>
@@ -132,7 +132,7 @@ const CreateProfile = () => {
                 />
                 <input
                   type="number"
-                  placeholder="Contact Number 1"
+                  placeholder="Contact Number 1*"
                   className="border-transparent outline-none border-b-2 border-b-slate-700 placeholder:text-black bg-transparent p-3 pl-6 font-bold w-[45%]"
                   id="number"
                   onChange={(e) =>
@@ -146,7 +146,7 @@ const CreateProfile = () => {
               <div className="space-x-8">
                 <input
                   type="nummber"
-                  placeholder="Contact Number 2"
+                  placeholder="Contact Number 2*"
                   className="border-transparent outline-none border-b-2 border-b-slate-700 placeholder:text-black bg-transparent p-3 pl-6 font-bold w-[45%]"
                   id="number"
                   onChange={(e) =>
@@ -158,7 +158,7 @@ const CreateProfile = () => {
                 />
                 <input
                   type="number"
-                  placeholder="Contact Number 3"
+                  placeholder="Contact Number 3*"
                   className="border-transparent outline-none border-b-2 border-b-slate-700 placeholder:text-black bg-transparent p-3 pl-6 font-bold w-[45%]"
                   id="number"
                   onChange={(e) =>
