@@ -22,7 +22,8 @@ const Navbar = () => {
     <>
       <div className="flex flex-col h-screen bg-gradient-to-r from-[#C7C5F4] to-[#776BCC]">
         <div className="border-b-2 rounded-b-xl h-20">
-          <div>
+          <div className='pl-6 flex h-full items-center'>
+            <span className='shadow-lg rounded-lg p-1 border text-lg pt-1 font-semibold'>EMI MANAGEMENT</span>
             <div className="flex space-x-4 p-5">
               <div>
                 <button
