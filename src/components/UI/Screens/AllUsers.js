@@ -211,7 +211,7 @@ const AllUsers = () => {
       <div className="h-full">
         <div className="p-5">
           <div className="w-full p-2 border-2 rounded-t-xl font-semibold bg-[#8f80ff]">
-            <span>ALL USERS</span>
+            <span>ALL EMIS</span>
           </div>
           <div>
             <DataTable

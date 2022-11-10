@@ -37,7 +37,7 @@ const Navbar = () => {
                   className="bg-white bg-opacity-50 bg-blur-xl py-2 px-6 rounded-3xl hover:bg-white"
                   onClick={() => navigate('newuser')}
                 >
-                  <span>ADD Users</span>
+                  <span>ADD EMIs</span>
                 </button>
               </div>
               <div>
@@ -45,7 +45,7 @@ const Navbar = () => {
                   className="bg-white bg-opacity-50 bg-blur-xl py-2 px-6 rounded-3xl hover:bg-white"
                   onClick={() => navigate('alluser')}
                 >
-                  <span>ALL Users</span>
+                  <span>ALL EMIs</span>
                 </button>
               </div>
               <div>

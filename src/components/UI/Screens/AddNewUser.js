@@ -139,10 +139,10 @@ const AddNewUser = () => {
       <div className="h-full px-4">
         <div className="w-full flex">
           <div className="w-1/2 border-r-2 px-4 py-2">
-            <h1 className="font-semibold text-lg">Add New User</h1>
+            <h1 className="font-semibold text-lg">ADD NEW EMI</h1>
             <div className="flex pt-2 space-x-4">
               <div className="flex flex-1 flex-col space-y-1">
-                <span>Name</span>
+                <span>Name*</span>
                 <input
                   type="text"
                   placeholder="name"
@@ -153,7 +153,7 @@ const AddNewUser = () => {
                 />
               </div>
               <div className="flex flex-1 flex-col space-y-1">
-                <span>Mobile No</span>
+                <span>Mobile No.*</span>
                 <input
                   type="number"
                   placeholder="mobile"
@@ -169,7 +169,7 @@ const AddNewUser = () => {
             </div>
             <div className="flex pt-3 space-x-4">
               <div className="flex flex-1 flex-col space-y-1">
-                <span>Email</span>
+                <span>Email*</span>
                 <input
                   type="email"
                   placeholder="email"
@@ -180,7 +180,7 @@ const AddNewUser = () => {
                 />
               </div>
               <div className="flex flex-1 flex-col space-y-1">
-                <span>Product Name</span>
+                <span>Product Name*</span>
                 <input
                   type="name"
                   placeholder="product name"
@@ -193,7 +193,7 @@ const AddNewUser = () => {
             </div>
             <div className="flex pt-3 space-x-4">
               <div className="flex flex-1 flex-col space-y-1">
-                <span>Product Details</span>
+                <span>Product Details*</span>
                 <input
                   type="name"
                   placeholder="product detail"
@@ -207,7 +207,7 @@ const AddNewUser = () => {
                 />
               </div>
               <div className="flex flex-1 flex-col space-y-1">
-                <span>Total Price</span>
+                <span>Total Price*</span>
                 <input
                   type="number"
                   placeholder="total price"
@@ -223,7 +223,7 @@ const AddNewUser = () => {
             </div>
             <div className="flex pt-3 space-x-4">
               <div className="flex flex-1 flex-col space-y-1">
-                <span>Initail Payment</span>
+                <span>Initail Payment*</span>
                 <input
                   type="number"
                   placeholder="Initail payment"
@@ -237,7 +237,7 @@ const AddNewUser = () => {
                 />
               </div>
               <div className="flex flex-1 flex-col space-y-1">
-                <span>No of Installments</span>
+                <span>No of Installments*</span>
                 <input
                   type="number"
                   placeholder="number of instalments"
@@ -253,7 +253,7 @@ const AddNewUser = () => {
             </div>
             <div className="flex pt-3 space-x-4">
               <div className="flex flex-1 flex-col space-y-1">
-                <span>Type of Installment</span>
+                <span>Type of Installment*</span>
                 <select
                   className="border-transparent outline-none border-b-2 border-b-slate-700 bg-transparent p-2 pl-3 placeholder:text-black"
                   onChange={(e) => {
@@ -272,7 +272,7 @@ const AddNewUser = () => {
                 </select>
               </div>
               <div className="flex flex-1 flex-col space-y-1">
-                <span>Intearest</span>
+                <span>Intearest*</span>
                 <input
                   type="number"
                   placeholder="Interest Rate"
@@ -288,7 +288,7 @@ const AddNewUser = () => {
             </div>
             <div className="flex pt-3 space-x-4">
               <div className="flex flex-1 flex-col space-y-1">
-                <span>Start Date</span>
+                <span>Start Date*</span>
                 <input
                   type="date"
                   placeholder="Start Date"
@@ -310,15 +310,15 @@ const AddNewUser = () => {
               >
                 Create Instalments
               </button>
-              {NewTable.length ? (
+              {/* {NewTable.length ? ( */}
                 <button
-                  disabled={true}
+                  disabled={!NewTable.length}
                   className="bg-white font-semibold hover:border-white w-3/4 2xl:mt-8 py-4 px-5 rounded-3xl border border-slate-500 flex justify-center items-center shadow-md shadow-black"
                   onClick={() => submit()}
                 >
                   {loader ? 'Loading...' : 'Submit'}
                 </button>
-              ):null}
+              {/* ) : null} */}
             </div>
           </div>
           <div className="p-4 w-1/2">

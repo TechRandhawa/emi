@@ -69,7 +69,7 @@ const Dashboard = () => {
         <div className="flex w-full text-xl">
           <div className=" w-1/3 p-2">
             <div className="bg-gradient-to-r to-[#C7C5F4] from-[#776BCC] p-8 space-y-2 shadow-xl border rounded-md">
-              <span>All Users</span>
+              <span>All EMIs</span>
               <div>{userLen}</div>
               <div
                 className="text-sm underline cursor-pointer"
@@ -77,7 +77,7 @@ const Dashboard = () => {
                   navigate('/main/alluser')
                 }}
               >
-                View All Users
+                View All EMIs
               </div>
             </div>
           </div>
