@@ -34,7 +34,8 @@ const CreateProfile = () => {
       values.contactNumber2 &&
       values.contactNumber3
     ) {
-      await setDoc(doc(db, 'users', state), values)
+      console.log(state.uid,"value");
+      await setDoc(doc(db, 'users', state.uid), values)
       // await addDoc(usersCollectionRef,{values})
       navigate('/main/dashboard')
     }else{
